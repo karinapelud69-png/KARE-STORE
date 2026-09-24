@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <title>KARÉ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+    }
+
+    body {
+      background: #17131f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .app-header {
+      width: 100%;
+      height: 64px;
+      padding: 0 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: relative;
+      z-index: 10;
+
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      background: rgba(15,12,22,.72);
+      backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .cart {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: calc(100vh - 64px);
+      padding: 70px 20px 80px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(190,115,255,.7),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 30%,
+          rgba(64,145,255,.6),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 55% 90%,
+          rgba(255,105,205,.4),
+          transparent 30%
+        ),
+        #17131f;
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 5;
+
+      text-align: center;
+
+      font-size: clamp(56px, 18vw, 110px);
+      line-height: .85;
+      font-weight: 900;
+      letter-spacing: -.07em;
+
+      background:
+        linear-gradient(
+          110deg,
+          #fff,
+          #d7c2ff,
+          #9ec7ff,
+          #fff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      text-shadow:
+        0 0 35px rgba(170,120,255,.25);
+    }
+
+    .hero-subtitle {
+      position: relative;
+      z-index: 5;
+
+      margin-top: 18px;
+
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-align: center;
+
+      color: rgba(255,255,255,.65);
+    }
+
+    .fashion-frame {
+      position: relative;
+      z-index: 4;
+
+      width: min(330px, 82vw);
+      height: min(470px, 115vw);
+
+      margin-top: 40px;
+
+      border: 2px solid rgba(255,255,255,.8);
+
+      background:
+        linear-gradient(
+          150deg,
+          #181818,
+          #696969 40%,
+          #181818 70%,
+          #aaa
+        );
+
+      box-shadow:
+        18px 18px 0 rgba(255,255,255,.12),
+        0 0 70px rgba(146,88,255,.3);
+
+      transform: rotate(-3deg);
+    }
+
+    .fashion-frame::after {
+      content: "KARÉ";
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      font-size: clamp(50px, 16vw, 90px);
+      font-weight: 900;
+      letter-spacing: -.08em;
+
+      color: rgba(255,255,255,.9);
+    }
+
+    .floating-pill {
+      position: absolute;
+      z-index: 6;
+
+      padding: 9px 13px;
+
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
+
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+
+      color: rgba(255,255,255,.85);
+    }
+
+    .pill-1 {
+      top: 12%;
+      left: 8%;
+    }
+
+    .pill-2 {
+      top: 25%;
+      right: 6%;
+    }
+
+    .pill-3 {
+      bottom: 12%;
+      left: 7%;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(30px);
+    }
+
+
+.orb-1 {
+      width: 120px;
+      height: 120px;
+      top: 8%;
+      left: -35px;
+      background: rgba(180,90,255,.35);
+    }
+
+    .orb-2 {
+      width: 150px;
+      height: 150px;
+      right: -50px;
+      top: 42%;
+      background: rgba(70,130,255,.3);
+    }
+
+    .orb-3 {
+      width: 130px;
+      height: 130px;
+      bottom: -40px;
+      left: 35%;
+      background: rgba(255,100,200,.28);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <div class="logo">KARÉ®</div>
+
+      <div class="cart">
+        КОРЗИНА (0)
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <div class="floating-pill pill-1">
+          NEW COLLECTION
+        </div>
+
+        <div class="floating-pill pill-2">
+          Y2K / FUTURE
+        </div>
+
+        <div class="floating-pill pill-3">
+          KARÉ STUDIO
+        </div>
+
+        <h1 class="hero-title">
+          KARÉ
+        </h1>
+
+        <p class="hero-subtitle">
+          Y2K / FUTURE / STUDIO
+        </p>
+
+        <div class="fashion-frame"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
+
+
