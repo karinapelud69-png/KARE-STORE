@@ -186,6 +186,124 @@
       color: rgba(255,255,255,.9);
     }
 
+   .products {
+  display: block;
+  width: 100%;
+  min-height: 600px;
+  padding: 80px 18px;
+  background: red;
+}
+
+    .products-title {
+      margin-bottom: 32px;
+    }
+
+    .products-title span {
+      display: block;
+      margin-bottom: 10px;
+
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .14em;
+
+      color: rgba(255,255,255,.45);
+    }
+
+    .products-title h2 {
+      font-size: 38px;
+      line-height: .9;
+      letter-spacing: -.06em;
+      font-weight: 900;
+
+      background:
+        linear-gradient(
+          110deg,
+          #fff,
+          #cdb4ff,
+          #8dbdff,
+          #fff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .product-card {
+      min-width: 0;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,.18);
+
+      background:
+        radial-gradient(
+          circle at 30% 20%,
+          rgba(190,115,255,.45),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          #25212d,
+          #111016
+        );
+
+      color: rgba(255,255,255,.85);
+
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -.08em;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.3);
+    }
+
+    .product-image::before {
+      content: "";
+      position: absolute;
+
+      width: 70%;
+      height: 70%;
+
+      border: 1px solid rgba(255,255,255,.12);
+      transform: rotate(12deg);
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      padding: 12px 2px 0;
+    }
+
+    .product-info strong {
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: .04em;
+    }
+
+    .product-info span {
+      font-size: 10px;
+      color: rgba(255,255,255,.55);
+    }
+
     .floating-pill {
       position: absolute;
       z-index: 6;
@@ -290,11 +408,57 @@
           KARÉ
         </h1>
 
-        <p class="hero-subtitle">
+       <p class="hero-subtitle">
           Y2K / FUTURE / STUDIO
         </p>
 
         <div class="fashion-frame"></div>
+
+      </section>
+
+      <section class="products">
+
+        <div class="products-title">
+          <span>KARÉ / COLLECTION</span>
+          <h2>НОВАЯ
+КОЛЛЕКЦИЯ</h2>
+        </div>
+
+        <div class="products-grid">
+
+          <article class="product-card">
+            <div class="product-image">KARÉ</div>
+            <div class="product-info">
+              <strong>KARÉ OVERSIZE TEE</strong>
+              <span>129.99 BYN</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">KARÉ</div>
+            <div class="product-info">
+              <strong>KARÉ FUTURE JACKET</strong>
+              <span>389.99 BYN</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">KARÉ</div>
+            <div class="product-info">
+              <strong>KARÉ RUNNER</strong>
+              <span>289.99 BYN</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image">KARÉ</div>
+            <div class="product-info">
+              <strong>KARÉ BAG 01</strong>
+              <span>219.99 BYN</span>
+            </div>
+          </article>
+
+        </div>
 
       </section>
 
