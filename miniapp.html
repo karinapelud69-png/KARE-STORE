@@ -64,10 +64,48 @@
     }
 
     .cart {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  cursor: pointer;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cart:active {
+  transform: scale(.94);
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.4);
+}
+.cart-bump {
+  animation: cartBump .35s ease;
+}
+
+@keyframes cartBump {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+hover: hover and (pointer: fine) {
+  .cart:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.35);
+  }
+}
 
     .hero {
       position: relative;
@@ -234,8 +272,23 @@
     }
 
     .product-card {
-      min-width: 0;
-    }
+  min-width: 0;
+  cursor: pointer;
+  transition: transform .25s ease, filter .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-card:active {
+  transform: scale(.97);
+  filter: brightness(1.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    filter: brightness(1.12);
+  }
+}
 
     .product-image {
       width: 100%;
@@ -475,8 +528,16 @@
 
       cartCount++;
 
-      document.querySelector('.cart').textContent =
+      const cart = document.querySelector('.cart');
+
+      cart.textContent =
         'КОРЗИНА (' + cartCount + ')';
+
+      cart.classList.remove('cart-bump');
+
+      void cart.offsetWidth;
+
+      cart.classList.add('cart-bump');
 
     });
 
