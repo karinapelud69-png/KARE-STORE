@@ -1,0 +1,3823 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KARÉ® — Future Fashion</title>
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap');
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+    body {
+
+      background: #f4f1ea;
+
+      color: #111;
+
+      font-family: 'Space Mono', monospace;
+
+      overflow-x: hidden;
+
+    }
+
+    /* =========================
+
+       GLOBAL
+
+    ========================= */
+
+    ::selection {
+
+      background: #a875ff;
+
+      color: white;
+
+    }
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+    button {
+
+      font-family: inherit;
+
+    }
+
+    .cursor {
+
+      position: fixed;
+
+      width: 16px;
+
+      height: 16px;
+
+      border: 2px solid #111;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      z-index: 9999;
+
+      transform: translate(-50%, -50%);
+
+      transition:
+
+        width .25s ease,
+
+        height .25s ease,
+
+        background .25s ease;
+
+      mix-blend-mode: difference;
+
+    }
+
+    .cursor.active {
+
+      width: 55px;
+
+      height: 55px;
+
+      background: white;
+
+    }
+
+    /* =========================
+
+       HEADER
+
+    ========================= */
+
+    header {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 76px;
+
+      padding: 0 32px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      z-index: 1000;
+
+      color: white;
+
+      mix-blend-mode: difference;
+
+    }
+
+    .logo-mini {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: 27px;
+
+      letter-spacing: -2px;
+
+    }
+
+    nav {
+
+      display: flex;
+
+      gap: 28px;
+
+    }
+
+    nav a,
+
+    .cart {
+
+      font-size: 10px;
+
+      font-weight: bold;
+
+      letter-spacing: 1px;
+
+      cursor: pointer;
+
+    }
+
+    nav a {
+
+      transition: opacity .2s;
+
+    }
+
+    nav a:hover {
+
+      opacity: .45;
+
+    }
+
+    /* =========================
+
+       HERO
+
+    ========================= */
+
+    .hero {
+
+      height: 100vh;
+
+      min-height: 720px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(
+
+          circle at 18% 22%,
+
+          rgba(190, 115, 255, .85),
+
+          transparent 24%
+
+        ),
+
+        radial-gradient(
+
+          circle at 82% 28%,
+
+          rgba(64, 145, 255, .75),
+
+          transparent 23%
+
+        ),
+
+        radial-gradient(
+
+          circle at 55% 95%,
+
+          rgba(255, 105, 205, .5),
+
+          transparent 25%
+
+        ),
+
+        #17131f;
+
+    }
+
+    /* moving color atmosphere */
+
+    .orb {
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      filter: blur(25px);
+
+      pointer-events: none;
+
+      mix-blend-mode: screen;
+
+    }
+
+    .orb-1 {
+
+      width: 240px;
+
+      height: 240px;
+
+      background: #8f4cff;
+
+      top: 10%;
+
+      left: 8%;
+
+      animation: float1 8s ease-in-out infinite alternate;
+
+    }
+
+    .orb-2 {
+
+      width: 300px;
+
+      height: 300px;
+
+      background: #246bff;
+
+      right: 8%;
+
+      top: 20%;
+
+      animation: float2 10s ease-in-out infinite alternate;
+
+    }
+
+    .orb-3 {
+
+      width: 220px;
+
+      height: 220px;
+
+      background: #ff42bc;
+
+      bottom: 5%;
+
+      left: 43%;
+
+      animation: float3 7s ease-in-out infinite alternate;
+
+    }
+
+    @keyframes float1 {
+
+      to {
+
+        transform: translate(100px, 60px) scale(1.2);
+
+      }
+
+    }
+
+    @keyframes float2 {
+
+      to {
+
+        transform: translate(-100px, 80px) scale(.8);
+
+      }
+
+    }
+
+    @keyframes float3 {
+
+      to {
+
+        transform: translate(60px, -80px) scale(1.25);
+
+      }
+
+    }
+
+    /* grid */
+
+    .grid {
+
+      position: absolute;
+
+      inset: 0;
+
+      opacity: .14;
+
+      background-image:
+
+        linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px),
+
+        linear-gradient(90deg,
+
+
+rgba(255,255,255,.35) 1px, transparent 1px);
+
+      background-size: 50px 50px;
+
+      transform: perspective(600px) rotateX(55deg) scale(1.8);
+
+      transform-origin: center bottom;
+
+    }
+
+    /* hero logo */
+
+    .hero-logo {
+
+      position: absolute;
+
+      left: 50%;
+
+      top: 49%;
+
+      transform:
+
+        translate(-50%, -50%)
+
+        translate3d(var(--logo-x, 0px), var(--logo-y, 0px), 0);
+
+      z-index: 6;
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: clamp(110px, 22vw, 330px);
+
+      line-height: .72;
+
+      letter-spacing: -16px;
+
+      white-space: nowrap;
+
+      background:
+
+        linear-gradient(
+
+          110deg,
+
+          #fff 0%,
+
+          #8a8a8a 18%,
+
+          #fff 31%,
+
+          #7d7d7d 45%,
+
+          #fff 55%,
+
+          #bcbcbc 70%,
+
+          #fff 85%,
+
+          #555 100%
+
+        );
+
+      background-size: 250% 100%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      filter:
+
+        drop-shadow(0 0 7px rgba(255,255,255,.7))
+
+        drop-shadow(0 15px 35px rgba(0,0,0,.4));
+
+      animation: chrome 4s linear infinite;
+
+      pointer-events: none;
+
+    }
+
+    @keyframes chrome {
+
+      from {
+
+        background-position: 0% 50%;
+
+      }
+
+      to {
+
+        background-position: 250% 50%;
+
+      }
+
+    }
+
+    /* central fashion frame */
+
+    .fashion-frame {
+
+      position: absolute;
+
+      left: 50%;
+
+      top: 50%;
+
+      width: min(330px, 48vw);
+
+      height: 510px;
+
+      transform:
+
+        translate(-50%, -50%)
+
+        translate3d(var(--image-x, 0px), var(--image-y, 0px))
+
+        rotate(-3deg);
+
+      z-index: 4;
+
+      border: 2px solid rgba(255,255,255,.8);
+
+      background:
+
+        linear-gradient(
+
+          150deg,
+
+          #181818,
+
+          #696969 40%,
+
+          #181818 70%,
+
+          #aaa
+
+        );
+
+      box-shadow:
+
+        25px 25px 0 rgba(255,255,255,.12),
+
+        0 0 70px rgba(146,88,255,.3);
+
+      transition: transform .12s ease-out;
+
+    }
+
+    /* abstract fashion silhouette */
+
+    .person-head {
+
+      position: absolute;
+
+      width: 92px;
+
+      height: 112px;
+
+      border-radius: 50%;
+
+      background:
+
+        linear-gradient(
+
+          130deg,
+
+          #ddd,
+
+          #777,
+
+          #222
+
+        );
+
+      left: 50%;
+
+      top: 12%;
+
+      transform: translateX(-50%);
+
+    }
+
+    .person-body {
+
+      position: absolute;
+
+      width: 220px;
+
+      height: 330px;
+
+      left: 50%;
+
+      top: 29%;
+
+      transform: translateX(-50%);
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          #111,
+
+          #777,
+
+          #202020,
+
+          #aaa,
+
+          #111
+
+        );
+
+      clip-path: polygon(
+
+        23% 0,
+
+        77% 0,
+
+        100% 22%,
+
+        86% 100%,
+
+        14% 100%,
+
+        0 22%
+
+      );
+
+    }
+
+    .person-leg {
+
+      position: absolute;
+
+      width: 80px;
+
+      height: 220px;
+
+      bottom: -65px;
+
+      background: #121212;
+
+    }
+
+    .leg-one {
+
+      left: 36%;
+
+      transform: rotate(5deg);
+
+    }
+
+    .leg-two {
+
+      right: 36%;
+
+      transform: rotate(-5deg);
+
+    }
+
+    /* labels */
+
+    .micro {
+
+      position: absolute;
+
+      z-index: 8;
+
+      color: white;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+    }
+
+    .micro.one {
+
+      left: 35px;
+
+      top: 120px;
+
+    }
+
+    .micro.two {
+
+      right: 35px;
+
+      bottom: 115px;
+
+    }
+
+    .micro.three {
+
+      left: 35px;
+
+      bottom: 30px;
+
+    }
+
+    /* floating pills */
+
+    .floating-pill {
+
+      position: absolute;
+
+      z-index: 9;
+
+      padding: 10px 15px;
+
+      border: 1px solid rgba(255,255,255,.7);
+
+      border-radius: 100px;
+
+      color: white;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      background: rgba(255,255,255,.08);
+
+      backdrop-filter: blur(10px);
+
+      transition: transform .2s ease;
+
+    }
+
+    .pill-one {
+
+      left: 12%;
+
+      top: 34%;
+
+    }
+
+    .pill-two {
+
+      right: 12%;
+
+      top: 29%;
+
+    }
+
+    .pill-three {
+
+      left: 17%;
+
+      bottom: 23%;
+
+    }
+
+    .pill-four {
+
+
+right: 16%;
+
+      bottom: 19%;
+
+    }
+
+    /* shop button */
+
+    .hero-button {
+
+      position: absolute;
+
+      right: 8%;
+
+      top: 55%;
+
+      z-index: 10;
+
+      padding: 18px 25px;
+
+      background: white;
+
+      color: #111;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-size: 10px;
+
+      font-weight: bold;
+
+      letter-spacing: 1px;
+
+      box-shadow:
+
+        8px 8px 0 #9c5cff;
+
+      transition:
+
+        transform .25s,
+
+        box-shadow .25s;
+
+    }
+
+    .hero-button:hover {
+
+      transform: translate(-5px, -5px);
+
+      box-shadow:
+
+        13px 13px 0 #ff48bf;
+
+    }
+
+    /* little sparkle */
+
+    .spark {
+
+      position: absolute;
+
+      z-index: 7;
+
+      color: white;
+
+      font-size: 25px;
+
+      animation: sparkle 2s ease-in-out infinite alternate;
+
+    }
+
+    .spark-1 {
+
+      left: 23%;
+
+      top: 19%;
+
+    }
+
+    .spark-2 {
+
+      right: 25%;
+
+      top: 17%;
+
+      animation-delay: .5s;
+
+    }
+
+    .spark-3 {
+
+      right: 20%;
+
+      bottom: 30%;
+
+      animation-delay: 1s;
+
+    }
+
+    @keyframes sparkle {
+
+      from {
+
+        opacity: .3;
+
+        transform: scale(.7) rotate(0);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: scale(1.3) rotate(25deg);
+
+      }
+
+    }
+
+    /* =========================
+
+       MARQUEE
+
+    ========================= */
+
+    .marquee {
+
+      height: 70px;
+
+      background: #111;
+
+      color: white;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      border-top: 2px solid #111;
+
+      border-bottom: 2px solid #111;
+
+    }
+
+    .marquee-track {
+
+      white-space: nowrap;
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: 27px;
+
+      animation: ticker 18s linear infinite;
+
+    }
+
+    .marquee-track span {
+
+      color: #a86cff;
+
+    }
+
+    @keyframes ticker {
+
+      from {
+
+        transform: translateX(0);
+
+      }
+
+      to {
+
+        transform: translateX(-50%);
+
+      }
+
+    }
+
+    /* =========================
+
+       INTRO
+
+    ========================= */
+
+    .intro {
+
+      position: relative;
+
+      min-height: 85vh;
+
+      padding: 150px 7vw;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 80px;
+
+      align-items: center;
+
+      overflow: hidden;
+
+    }
+
+    .intro-glow {
+
+      position: absolute;
+
+      width: 400px;
+
+      height: 400px;
+
+      border-radius: 50%;
+
+      background: #9c5cff;
+
+      filter: blur(120px);
+
+      opacity: .18;
+
+      right: -100px;
+
+      top: 20%;
+
+    }
+
+    .intro h2 {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: clamp(60px, 9vw, 130px);
+
+      line-height: .8;
+
+      letter-spacing: -7px;
+
+    }
+
+    .gradient-word {
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          #111,
+
+          #9b62ff,
+
+          #ff52c4,
+
+          #111
+
+        );
+
+      background-size: 250%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      animation: gradientMove 5s linear infinite;
+
+    }
+
+    @keyframes gradientMove {
+
+      to {
+
+        background-position: 250% 50%;
+
+      }
+
+    }
+
+    .intro-text {
+
+      max-width: 500px;
+
+      font-size: 14px;
+
+      line-height: 1.9;
+
+    }
+
+    .intro-meta {
+
+      margin-top: 30px;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+    }
+
+    /* =========================
+
+       SHOP
+
+    ========================= */
+
+    .shop {
+
+      padding: 120px 5vw 150px;
+
+      background: #eeeae3;
+
+    }
+
+    .section-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: end;
+
+      margin-bottom: 70px;
+
+    }
+
+    .section-title {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: clamp(65px, 10vw, 145px);
+
+      line-height: .75;
+
+      letter-spacing: -8px;
+
+    }
+
+    .section-title span {
+
+      color: #995aff;
+
+    }
+
+    .products {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 50px;
+
+    }
+
+    .product {
+
+      cursor: pointer;
+
+      position: relative;
+
+    }
+
+    .product-image {
+
+      height:
+
+
+550px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      border: 2px solid #111;
+
+      background:
+
+        radial-gradient(
+
+          circle at 30% 25%,
+
+          #bca2ff,
+
+          transparent 22%
+
+        ),
+
+        linear-gradient(
+
+          135deg,
+
+          #c9c5c1,
+
+          #efedf0,
+
+          #8f8c92
+
+        );
+
+      transition:
+
+        transform .5s cubic-bezier(.2,.8,.2,1),
+
+        box-shadow .5s;
+
+    }
+
+    .product:nth-child(2) .product-image {
+
+      background:
+
+        radial-gradient(
+
+          circle at 70% 20%,
+
+          #69a6ff,
+
+          transparent 25%
+
+        ),
+
+        linear-gradient(
+
+          135deg,
+
+          #d8d8d8,
+
+          #f4f4f4,
+
+          #888
+
+        );
+
+    }
+
+    .product:nth-child(3) .product-image {
+
+      background:
+
+        radial-gradient(
+
+          circle at 25% 70%,
+
+          #ff6ec9,
+
+          transparent 25%
+
+        ),
+
+        linear-gradient(
+
+          135deg,
+
+          #ddd,
+
+          #f5f5f5,
+
+          #aaa
+
+        );
+
+    }
+
+    .product:nth-child(4) .product-image {
+
+      background:
+
+        radial-gradient(
+
+          circle at 70% 65%,
+
+          #7b72ff,
+
+          transparent 27%
+
+        ),
+
+        linear-gradient(
+
+          135deg,
+
+          #d0d0d0,
+
+          #eee,
+
+          #777
+
+        );
+
+    }
+
+    .product:hover .product-image {
+
+      transform:
+
+        translateY(-10px)
+
+        rotateX(3deg)
+
+        rotateY(-4deg);
+
+      box-shadow:
+
+        14px 14px 0 #9b61ff;
+
+    }
+
+    .product:nth-child(2):hover .product-image {
+
+      box-shadow:
+
+        14px 14px 0 #438cff;
+
+    }
+
+    .product:nth-child(3):hover .product-image {
+
+      box-shadow:
+
+        14px 14px 0 #ff55bd;
+
+    }
+
+    .product:nth-child(4):hover .product-image {
+
+      box-shadow:
+
+        14px 14px 0 #7269ff;
+
+    }
+
+    .product-tag {
+
+      position: absolute;
+
+      top: 18px;
+
+      left: 18px;
+
+      padding: 8px 12px;
+
+      background: white;
+
+      border: 2px solid #111;
+
+      font-size: 9px;
+
+      font-weight: bold;
+
+      z-index: 3;
+
+    }
+
+    .product-shine {
+
+      position: absolute;
+
+      width: 200px;
+
+      height: 600px;
+
+      top: -50px;
+
+      left: -300px;
+
+      transform: rotate(20deg);
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          transparent,
+
+          rgba(255,255,255,.7),
+
+          transparent
+
+        );
+
+      transition: left .8s ease;
+
+    }
+
+    .product:hover .product-shine {
+
+      left: 700px;
+
+    }
+
+    .clothing {
+
+      position: absolute;
+
+      left: 50%;
+
+      top: 52%;
+
+      transform: translate(-50%, -50%);
+
+      width: 260px;
+
+      height: 350px;
+
+      background:
+
+        linear-gradient(
+
+          100deg,
+
+          #111,
+
+          #666,
+
+          #191919,
+
+          #aaa,
+
+          #111
+
+        );
+
+      clip-path: polygon(
+
+        24% 0,
+
+        76% 0,
+
+        100% 22%,
+
+        85% 100%,
+
+        15% 100%,
+
+        0 22%
+
+      );
+
+    }
+
+    .product:nth-child(2) .clothing {
+
+      height: 420px;
+
+      width: 280px;
+
+      background:
+
+        linear-gradient(
+
+          110deg,
+
+          #171717,
+
+          #aaa,
+
+          #292929
+
+        );
+
+    }
+
+    .product:nth-child(3) .clothing {
+
+      width: 360px;
+
+      height: 170px;
+
+      border-radius: 50%;
+
+    }
+
+    .product:nth-child(4) .clothing {
+
+      width: 240px;
+
+      height: 270px;
+
+      border-radius: 25px;
+
+      background:
+
+        linear-gradient(
+
+          135deg,
+
+          #111,
+
+          #777,
+
+          #222
+
+        );
+
+    }
+
+    .product-info {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      padding-top: 18px;
+
+      font-size: 11px;
+
+      font-weight: bold;
+
+    }
+
+    .price {
+
+      font-family: 'Archivo Black', sans-serif;
+
+    }
+
+    /* =========================
+
+       LOOKBOOK
+
+    ========================= */
+
+    .lookbook {
+
+      background: #111;
+
+      color: white;
+
+      padding: 140px 5vw 180px;
+
+      overflow: hidden;
+
+    }
+
+    .lookbook-title {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size:
+
+
+clamp(65px, 12vw, 180px);
+
+      line-height: .7;
+
+      letter-spacing: -10px;
+
+      margin-bottom: 100px;
+
+    }
+
+    .lookbook-title span {
+
+      color: #a766ff;
+
+    }
+
+    .look-row {
+
+      display: flex;
+
+      gap: 35px;
+
+      width: max-content;
+
+      transform:
+
+        translateX(var(--look-x, 0px));
+
+    }
+
+    .look {
+
+      width: 390px;
+
+      height: 550px;
+
+      position: relative;
+
+      border: 1px solid #555;
+
+      overflow: hidden;
+
+      background:
+
+        linear-gradient(
+
+          145deg,
+
+          #161616,
+
+          #7657aa,
+
+          #111
+
+        );
+
+    }
+
+    .look:nth-child(2) {
+
+      margin-top: 100px;
+
+      background:
+
+        linear-gradient(
+
+          145deg,
+
+          #303030,
+
+          #3e75d6,
+
+          #111
+
+        );
+
+    }
+
+    .look:nth-child(3) {
+
+      margin-top: 25px;
+
+      background:
+
+        linear-gradient(
+
+          145deg,
+
+          #111,
+
+          #d254a8,
+
+          #333
+
+        );
+
+    }
+
+    .look:nth-child(4) {
+
+      margin-top: 150px;
+
+      background:
+
+        linear-gradient(
+
+          145deg,
+
+          #777,
+
+          #7461ff,
+
+          #111
+
+        );
+
+    }
+
+    .look-number {
+
+      position: absolute;
+
+      top: 20px;
+
+      left: 20px;
+
+      font-size: 10px;
+
+    }
+
+    .look-name {
+
+      position: absolute;
+
+      bottom: 20px;
+
+      left: 20px;
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: 30px;
+
+    }
+
+    /* =========================
+
+       FINAL
+
+    ========================= */
+
+    .final {
+
+      min-height: 85vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      flex-direction: column;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(
+
+          circle at 50% 50%,
+
+          #d3baff,
+
+          transparent 25%
+
+        ),
+
+        #f4f1ea;
+
+    }
+
+    .final-label {
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      margin-bottom: 30px;
+
+    }
+
+    .final-logo {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: clamp(90px, 20vw, 300px);
+
+      line-height: .7;
+
+      letter-spacing: -14px;
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          #111,
+
+          #985cff,
+
+          #ff4fc1,
+
+          #348aff,
+
+          #111
+
+        );
+
+      background-size: 300%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      animation: finalGradient 5s linear infinite;
+
+    }
+
+    @keyframes finalGradient {
+
+      to {
+
+        background-position: 300% 50%;
+
+      }
+
+    }
+
+    .final button {
+
+      margin-top: 65px;
+
+      padding: 18px 32px;
+
+      background: #111;
+
+      color: white;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-size: 10px;
+
+      font-weight: bold;
+
+      box-shadow: 8px 8px 0 #a35cff;
+
+      transition: .25s;
+
+    }
+
+    .final button:hover {
+
+      transform: translate(-5px, -5px);
+
+      box-shadow: 13px 13px 0 #ff4fc1;
+
+    }
+
+    /* =========================
+
+       FOOTER
+
+    ========================= */
+
+    footer {
+
+      background: #111;
+
+      color: white;
+
+      padding: 70px 5vw 30px;
+
+      display: grid;
+
+      grid-template-columns: 2fr 1fr 1fr;
+
+      gap: 50px;
+
+    }
+
+    footer h3 {
+
+      font-family: 'Archivo Black', sans-serif;
+
+      font-size: 70px;
+
+      letter-spacing: -5px;
+
+    }
+
+    footer p {
+
+      color: #aaa;
+
+      font-size: 10px;
+
+      line-height: 2.2;
+
+    }
+
+    .footer-bottom {
+
+      grid-column: 1 / -1;
+
+      border-top: 1px solid #333;
+
+      padding-top: 25px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      color: #666;
+
+      font-size: 9px;
+
+    }
+
+    /* =========================
+
+       REVEAL
+
+    ========================= */
+
+    .reveal {
+
+      opacity: 0;
+
+      transform: translateY(70px);
+
+      transition:
+
+        opacity 1s ease,
+
+        transform 1s cubic-bezier(.2,.8,.2,1);
+
+    }
+
+    .reveal.visible {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+    /* =========================
+
+
+MOBILE
+
+    ========================= */
+
+    max-width: 800px {
+
+      .cursor {
+
+        display: none;
+
+      }
+
+      header {
+
+        padding: 0 18px;
+
+      }
+
+      nav {
+
+        display: none;
+
+      }
+
+      .hero {
+
+        min-height: 700px;
+
+      }
+
+      .hero-logo {
+
+        font-size: 27vw;
+
+        letter-spacing: -8px;
+
+      }
+
+      .fashion-frame {
+
+        width: 65vw;
+
+        height: 470px;
+
+      }
+
+      .hero-button {
+
+        right: 50%;
+
+        transform: translateX(50%);
+
+        top: auto;
+
+        bottom: 65px;
+
+      }
+
+      .hero-button:hover {
+
+        transform: translateX(50%) translateY(-5px);
+
+      }
+
+      .floating-pill {
+
+        font-size: 7px;
+
+        padding: 7px 10px;
+
+      }
+
+      .pill-one {
+
+        left: 5%;
+
+      }
+
+      .pill-two {
+
+        right: 5%;
+
+      }
+
+      .pill-three {
+
+        left: 5%;
+
+      }
+
+      .pill-four {
+
+        right: 5%;
+
+      }
+
+      .intro {
+
+        grid-template-columns: 1fr;
+
+        padding: 110px 7vw;
+
+      }
+
+      .products {
+
+        grid-template-columns: 1fr;
+
+      }
+
+      .product-image {
+
+        height: 470px;
+
+      }
+
+      .look {
+
+        width: 280px;
+
+        height: 430px;
+
+      }
+
+      footer {
+
+        grid-template-columns: 1fr;
+
+      }
+
+      footer h3 {
+
+        font-size: 60px;
+
+      }
+
+      .footer-bottom {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+      }
+
+    }
+.cart-drawer {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  width: 480px;
+  max-width: 88vw;
+
+  height: 70vh;
+  max-height: 620px;
+
+  background:
+    radial-gradient(circle at 15% 10%, rgba(180, 90, 255, .18), transparent 32%),
+    radial-gradient(circle at 90% 80%, rgba(70, 130, 255, .16), transparent 35%),
+    #0d0d12;
+
+  color: #fff;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 26px;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.5),
+    0 0 70px rgba(120,70,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.08);
+
+  backdrop-filter: blur(25px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate(-50%, -50%)
+    scale(.94);
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease,
+    transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.cart-drawer.open {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+.cart-header {
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 24px 24px 18px;
+
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.cart-kicker {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  opacity: .55;
+  margin-bottom: 8px;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.cart-close {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.cart-close:hover {
+  background: #111;
+  color: #fff;
+}
+
+.cart-footer {
+  flex-shrink: 0;
+
+  padding: 18px 24px 22px;
+
+  border-top: 1px solid rgba(255,255,255,.10);
+
+  background: rgba(0,0,0,.12);
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.cart-total strong {
+  font-size: 22px;
+}
+
+.checkout-button {
+  width: 100%;
+  min-height: 54px;
+  padding: 17px 20px;
+
+  box-sizing: border-box;
+
+  border: none;
+  border-radius: 100px;
+
+  background: #fff;
+  color: #111;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+
+  cursor: pointer;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.checkout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(140,90,255,.25);
+}
+
+max-width: 600px {
+  .cart-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+/* ===== KARÉ CART — NEW STYLE ===== */
+
+.cart-drawer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 480px;
+  max-width: 88vw;
+
+  background:
+    radial-gradient(circle at 20% 10%, rgba(180, 90, 255, .18), transparent 30%),
+    radial-gradient(circle at 90% 70%, rgba(70, 130, 255, .16), transparent 35%),
+    #0d0d12;
+
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 26px;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.5),
+    0 0 70px rgba(120,70,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+
+  backdrop-filter: blur(25px);
+
+  transform: translate(-50%, -50%) scale(.94);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1),
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.cart-drawer.open {
+  transform: translate(-50%, -50%) scale(1);
+
+  opacity: 1;
+  visibility: visible;
+}
+
+/* верх корзины */
+
+.cart-header {
+  padding: 28px 26px 22px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.cart-kicker {
+  color: rgba(255,255,255,.5);
+  letter-spacing: .18em;
+  font-size: 10px;
+}
+
+.cart-header h2 {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 34px;
+  letter-spacing: -.04em;
+}
+
+/* крестик */
+
+.cart-close {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  font-size: 25px;
+  transition: .3s ease;
+}
+
+.cart-close:hover {
+  transform: rotate(90deg) scale(1.08);
+  background: #fff;
+  color: #111;
+}
+
+/* товары */
+
+.cart-items {
+  flex: 1;
+  min-height: 0;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cart-items::-webkit-scrollbar {
+  display: none;
+}
+
+.cart-item {
+  position: relative;
+  padding: 18px;
+  margin-bottom: 12px;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,.025)
+    );
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 10px 30px rgba(0,0,0,.18);
+  transition: .3s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(190,130,255,.5);
+  box-shadow:
+    0 12px 35px rgba(120,70,255,.18);
+}
+
+.cart-item strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: .04em;
+}
+
+.cart-item > div:first-child span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255,255,255,.6);
+  font-size: 13px;
+}
+
+/* кнопки количества */
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.cart-quantity button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.cart-quantity button:hover {
+  transform: scale(1.12);
+  background: #fff;
+  color: #111;
+  box-shadow: 0 0 20px rgba(255,255,255,.25);
+}
+
+.cart-quantity .item-quantity {
+  min-width: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* нижняя часть */
+
+.cart-footer {
+  margin-top: auto;
+  padding: 22px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cart-total span {
+  color: rgba(255,255,255,.5);
+  font-size: 11px;
+  letter-spacing: .16em;
+}
+
+.cart-total strong {
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: -.04em;
+}
+
+/* оформление */
+
+.checkout-button {
+  width: 100%;
+  min-height: 58px;
+  border: 0;
+  border-radius: 100px;
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff,
+      #d8c5ff,
+      #a7c7ff,
+      #ffffff
+    );
+  background-size: 250% 100%;
+  color: #111;
+  font-weight: 800;
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: .35s ease;
+  animation: karéButtonFlow 5s ease infinite;
+}
+
+.checkout-button:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    0 10px 35px rgba(150,100,255,.35);
+}
+
+@keyframes karéButtonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* затемнение вокруг корзины */
+
+.cart-overlay {
+  background:
+    radial-gradient(circle at 70% 50%, rgba(120,70,255,.12), transparent 35%),
+    rgba(0,0,0,.58);
+  backdrop-filter: blur(5px);
+}
+/* ===== KARÉ CHECKOUT — DARK GLASS FIX ===== */
+
+.checkout-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10000;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+}
+
+.checkout-modal.open {
+  display: flex;
+}
+
+.checkout-box {
+  width: 500px;
+  max-width: calc(100vw - 40px);
+
+  max-height: 82vh;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  box-sizing: border-box;
+
+  padding: 38px 34px 34px;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(180, 100, 255, .18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(70, 130, 255, .12),
+      transparent 35%
+    ),
+    rgba(17, 17, 24, .94);
+
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.7),
+    0 0 90px rgba(110,70,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+
+  backdrop-filter: blur(30px);
+
+  position: relative;
+}
+.checkout-box::-webkit-scrollbar {
+  display: none;
+}
+
+.checkout-box h2 {
+  color: #fff;
+}
+
+.delivery-option {
+  width: 100%;
+  min-height: 78px;
+  padding: 18px 20px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.025)
+    );
+
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+
+  color: #fff;
+  text-align: left;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 8px 25px rgba(0,0,0,.2);
+
+  cursor: pointer;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+
+.delivery-option strong {
+  display: block;
+
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.delivery-option span {
+  display: block;
+
+  margin-top: 7px;
+
+  color: rgba(255,255,255,.5);
+  font-size: 12px;
+}
+
+.delivery-option:hover {
+  transform: translateY(-3px);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(140,80,255,.25),
+      rgba(70,120,255,.14)
+    );
+
+  border-color: rgba(190,140,255,.65);
+
+  box-shadow:
+    0 12px 40px rgba(100,60,255,.25),
+    inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.delivery-option:active {
+  transform: scale(.98);
+}
+
+.checkout-form input {
+  width: 100%;
+  height: 54px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 0 18px;
+
+  background: rgba(255,255,255,.055);
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.checkout-form input::placeholder {
+  color: rgba(255,255,255,.42);
+}
+
+.checkout-form input:focus {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(180,130,255,.7);
+  box-shadow:
+    0 0 0 3px rgba(140,90,255,.08),
+    0 0 25px rgba(120,70,255,.15);
+}
+
+.checkout-form h2 {
+  color: #fff;
+}
+
+.checkout-close {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: rgba(255,255,255,.06);
+
+  color: rgba(255,255,255,.85);
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: 50%;
+
+  font-family: inherit;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 8px 25px rgba(0,0,0,.2);
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    color .25s ease,
+    box-shadow .25s ease;
+}
+
+.checkout-close:hover {
+  transform: rotate(90deg) scale(1.05);
+
+  background: rgba(255,255,255,.12);
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 30px rgba(120,70,255,.25),
+    inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.checkout-close:active {
+  transform: rotate(90deg) scale(.95);
+}
+.checkout-submit {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 100px;
+
+  background: linear-gradient(
+    110deg,
+    #ffffff,
+    #d8c5ff,
+    #a7c7ff,
+    #ffffff
+  );
+
+  background-size: 250% 100%;
+
+  color: #111;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 30px rgba(140,90,255,.18);
+
+  animation: karéButtonFlow 5s ease infinite;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.checkout-submit:hover {
+  transform: translateY(-3px) scale(1.01);
+
+  box-shadow:
+    0 12px 40px rgba(140,90,255,.35);
+}
+
+.checkout-submit:active {
+  transform: scale(.98);
+}
+  </style>
+
+</head>
+
+<body>
+
+  <div class="cursor"></div>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="logo-mini">
+
+     KARÉ®
+
+    </div>
+
+    <nav>
+
+      <a href="#shop">SHOP</a>
+
+      <a href="#new">NEW IN</a>
+
+      <a href="#lookbook">LOOKBOOK</a>
+
+      <a href="#about">ABOUT</a>
+
+    </nav>
+
+   <div class="cart" id="cartButton" onclick="document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open');">
+    
+  КОРЗИНА (<span id="cartCount">0</span>)
+</div>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="orb orb-1"></div>
+
+    <div class="orb orb-2"></div>
+
+    <div class="orb orb-3"></div>
+
+    <div class="grid"></div>
+
+    <div class="fashion-frame">
+
+      <div class="person-head"></div>
+
+      <div class="person-body"></div>
+
+      <div class="person-leg leg-one"></div>
+
+      <div class="person-leg leg-two"></div>
+
+    </div>
+
+    <div class="hero-logo">
+
+      KARÉ
+
+    </div>
+
+    <div class="micro one">
+
+      KARÉ / EST. 2026
+
+    </div>
+
+    <div class="micro two">
+
+      DROP 01 / FUTURE
+
+    </div>
+
+    <div class="micro three">
+
+      MOVE / EXPLORE / SHOP
+
+    </div>
+
+    <div class="floating-pill pill-one">
+
+      NEW COLLECTION
+
+    </div>
+
+    <div class="floating-pill pill-two">
+
+      Y2K / FUTURE
+
+    </div>
+
+    <div class="floating-pill pill-three">
+
+      01 — 26
+
+    </div>
+
+    <div class="floating-pill pill-four">
+
+      KARÉ STUDIO
+
+    </div>
+
+    <div class="spark spark-1">
+
+      ✦
+
+    </div>
+
+    <div class="spark spark-2">
+
+      ✧
+
+    </div>
+
+    <div class="spark spark-3">
+
+      ✦
+
+    </div>
+
+    <button
+
+      class="hero-button"
+
+      onclick="goShop()"
+
+    >
+
+      SHOP NEW COLLECTION →
+
+    </button>
+
+  </section>
+
+  <!-- MARQUEE -->
+
+  <div class="marquee">
+
+    <div class="marquee-track">
+
+      KARÉ® — <span>NEW COLLECTION</span> —
+
+      Y2K FUTURE — KARÉ® —
+
+      <span>DROP 01</span> —
+
+      DIGITAL FASHION —
+
+      KARÉ® —
+
+      <span>NEW COLLECTION</span> —
+
+      Y2K FUTURE —
+
+      KARÉ® —
+
+      <span>DROP 01</span> —
+
+    </div>
+
+  </div>
+
+  <!-- INTRO -->
+
+  <section
+
+    class="intro"
+
+    id="about"
+
+  >
+
+    <div class="intro-glow"></div>
+
+    <div class="reveal">
+
+      <h2>
+
+        DRESS
+
+        YOUR
+
+        <span class="gradient-word">
+
+          FUTURE.
+
+        </span>
+
+      </h2>
+
+    </div>
+
+    <div class="reveal">
+
+      <p class="intro-text">
+
+        KARÉ — fashion-пространство для тех,
+
+        кто хочет выглядеть иначе.
+
+        Мы смешиваем streetwear,
+
+        Y2K эстетику, digital culture
+
+        и современный дизайн.
+
+        
+
+        Не следуй стилю.
+
+        Создавай его.
+
+      </p>
+
+      <div class="intro-meta">
+
+        COLLECTION 01 / 2026
+
+      </div>
+
+    </div>
+
+
+</section>
+
+  <!-- SHOP -->
+
+  <section
+
+    class="shop"
+
+    id="shop"
+
+  >
+
+    <div class="section-header reveal">
+
+      <div class="section-title">
+
+        SHOP<span>.</span>
+
+      </div>
+
+      <div>
+
+        01 — 04
+
+      </div>
+
+    </div>
+
+    <div class="products">
+
+      <!-- PRODUCT 1 -->
+
+      <article
+
+        class="product reveal"
+
+        data-product="KARÉ OVERSIZE TEE"
+
+      >
+
+        <div class="product-image">
+
+          <div class="product-tag">
+
+            NEW
+
+          </div>
+
+          <div class="product-shine"></div>
+
+          <div class="clothing"></div>
+
+        </div>
+
+        <div class="product-info">
+
+          <span>
+
+            KARÉ OVERSIZE TEE
+
+          </span>
+
+          <span class="price">
+
+            129.99 BYN
+
+          </span>
+
+        </div>
+
+      </article>
+
+      <!-- PRODUCT 2 -->
+
+      <article
+
+        class="product reveal"
+
+        data-product="KARÉ FUTURE JACKET"
+
+      >
+
+        <div class="product-image">
+
+          <div class="product-tag">
+
+            DROP 01
+
+          </div>
+
+          <div class="product-shine"></div>
+
+          <div class="clothing"></div>
+
+        </div>
+
+        <div class="product-info">
+
+          <span>
+
+            KARÉ FUTURE JACKET
+
+          </span>
+
+          <span class="price">
+
+            389.99 BYN
+
+          </span>
+
+        </div>
+
+      </article>
+
+      <!-- PRODUCT 3 -->
+
+      <article
+
+        class="product reveal"
+
+        data-product="KARÉ RUNNER"
+
+      >
+
+        <div class="product-image">
+
+          <div class="product-tag">
+
+            NEW
+
+          </div>
+
+          <div class="product-shine"></div>
+
+          <div class="clothing"></div>
+
+        </div>
+
+        <div class="product-info">
+
+          <span>
+
+            KARÉ RUNNER
+
+          </span>
+
+          <span class="price">
+
+            289.99 BYN
+
+          </span>
+
+        </div>
+
+      </article>
+
+      <!-- PRODUCT 4 -->
+
+      <article
+
+        class="product reveal"
+
+        data-product="KARÉ BAG 01"
+
+      >
+
+        <div class="product-image">
+
+          <div class="product-tag">
+
+            LIMITED
+
+          </div>
+
+          <div class="product-shine"></div>
+
+          <div class="clothing"></div>
+
+        </div>
+
+        <div class="product-info">
+
+          <span>
+
+            KARÉ BAG 01
+
+          </span>
+
+          <span class="price">
+
+            219.99 BYN
+
+          </span>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- LOOKBOOK -->
+
+  <section
+
+    class="lookbook"
+
+    id="lookbook"
+
+  >
+
+    <div class="lookbook-title reveal">
+
+      LOOK
+
+      <span>BOOK.</span>
+
+    </div>
+
+    <div class="look-row">
+
+      <div class="look">
+
+        <div class="look-number">
+
+          01 / KARÉ
+
+        </div>
+
+        <div class="look-name">
+
+          RAW
+
+        </div>
+
+      </div>
+
+      <div class="look">
+
+        <div class="look-number">
+
+          02 / KARÉ
+
+        </div>
+
+        <div class="look-name">
+
+          FUTURE
+
+        </div>
+
+      </div>
+
+      <div class="look">
+
+        <div class="look-number">
+
+          03 / KARÉ
+
+        </div>
+
+        <div class="look-name">
+
+          NIGHT
+
+        </div>
+
+      </div>
+
+      <div class="look">
+
+        <div class="look-number">
+
+          04 / KARÉ
+
+        </div>
+
+        <div class="look-name">
+
+          DIGITAL
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FINAL -->
+
+  <section class="final">
+
+    <div class="final-label">
+
+      WELCOME TO KARÉ
+
+    </div>
+
+    <div
+
+      class="final-logo"
+
+      id="finalLogo"
+
+    >
+
+      KARÉ
+
+    </div>
+
+    <button onclick="goShop()">
+
+      ENTER SHOP
+
+    </button>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+
+      <h3>
+
+        KARÉ®
+
+      </h3>
+
+    </div>
+
+    <div>
+
+      <p>SHOP</p>
+
+      <p>NEW IN</p>
+
+      <p>LOOKBOOK</p>
+
+      <p>ABOUT</p>
+
+    </div>
+
+    <div>
+
+      <p>INSTAGRAM</p>
+
+      <p>TIKTOK</p>
+
+      <p>CONTACT</p>
+
+      <p>DELIVERY</p>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>
+
+        © 2026 KARÉ STUDIO
+
+      </span>
+
+
+<span>
+
+        MADE FOR THE NEXT
+
+      </span>
+
+    </div>
+
+  </footer>
+
+  <script>
+
+    /* =========================
+
+       CURSOR
+
+    ========================= */
+
+    const cursor =
+
+      document.querySelector('.cursor');
+
+    document.addEventListener(
+
+      'mousemove',
+
+      function(e) {
+
+        cursor.style.left =
+
+          e.clientX + 'px';
+
+        cursor.style.top =
+
+          e.clientY + 'px';
+
+      }
+
+    );
+
+    document
+
+      .querySelectorAll(
+
+        'button, a, .product, .floating-pill'
+
+      )
+
+      .forEach(function(element) {
+
+        element.addEventListener(
+
+          'mouseenter',
+
+          function() {
+
+            cursor.classList.add('active');
+
+          }
+
+        );
+
+        element.addEventListener(
+
+          'mouseleave',
+
+          function() {
+
+            cursor.classList.remove('active');
+
+          }
+
+        );
+
+      });
+
+    /* =========================
+
+       HERO PARALLAX
+
+    ========================= */
+
+    const hero =
+
+      document.querySelector('.hero');
+
+    const heroLogo =
+
+      document.querySelector('.hero-logo');
+
+    const fashionFrame =
+
+      document.querySelector('.fashion-frame');
+
+    hero.addEventListener(
+
+      'mousemove',
+
+      function(e) {
+
+        const x =
+
+          e.clientX / window.innerWidth - .5;
+
+        const y =
+
+          e.clientY / window.innerHeight - .5;
+
+        heroLogo.style.setProperty(
+
+          '--logo-x',
+
+          `${x * -25}px`
+
+        );
+
+        heroLogo.style.setProperty(
+
+          '--logo-y',
+
+          `${y * -18}px`
+
+        );
+
+        fashionFrame.style.setProperty(
+
+          '--image-x',
+
+          `${x * 45}px`
+
+        );
+
+        fashionFrame.style.setProperty(
+
+          '--image-y',
+
+          `${y * 45}px`
+
+        );
+
+        document
+
+          .querySelectorAll('.floating-pill')
+
+          .forEach(function(pill, index) {
+
+            const strength =
+
+              (index + 1) * 12;
+
+            pill.style.transform =
+
+              `translate(${x * strength}px, ${y * strength}px)`;
+
+          });
+
+      }
+
+    );
+
+    /* =========================
+
+       LOOKBOOK PARALLAX
+
+    ========================= */
+
+    const lookRow =
+
+      document.querySelector('.look-row');
+
+    window.addEventListener(
+
+      'scroll',
+
+      function() {
+
+        const section =
+
+          document.querySelector('.lookbook');
+
+        const rect =
+
+          section.getBoundingClientRect();
+
+        if (
+
+          rect.top < window.innerHeight &&
+
+          rect.bottom > 0
+
+        ) {
+
+          const movement =
+
+            (window.innerHeight / 2 - rect.top)
+
+            * .18;
+
+          lookRow.style.setProperty(
+
+            '--look-x',
+
+            `${-movement}px`
+
+          );
+
+        }
+
+      }
+
+    );
+
+    /* =========================
+
+       REVEAL
+
+    ========================= */
+
+    const observer =
+
+      new IntersectionObserver(
+
+        function(entries) {
+
+          entries.forEach(
+
+            function(entry) {
+
+              if (
+
+                entry.isIntersecting
+
+              ) {
+
+                entry.target
+
+                  .classList
+
+                  .add('visible');
+
+              }
+
+            }
+
+          );
+
+        },
+
+        {
+
+          threshold: .15
+
+        }
+
+      );
+
+    document
+
+      .querySelectorAll('.reveal')
+
+      .forEach(function(element) {
+
+        observer.observe(element);
+
+      });
+
+    /* =========================
+
+       CART
+
+    ========================= */
+
+  let cartCount = 0;
+  let cartTotal = 0;
+
+function updateCartTotal() {
+  let total = 0;
+
+  document.querySelectorAll('.cart-item').forEach(function(item) {
+    const price = parseFloat(item.dataset.price);
+    const quantity = Number(item.querySelector('.item-quantity').textContent);
+
+    total += price * quantity;
+  });
+
+  document.getElementById('cartTotal').textContent =
+    'BYN' + total.toFixed(2);
+}
+function updateCartCount() {
+  let count = 0;
+
+  document.querySelectorAll('.cart-item').forEach(function(item) {
+    count += Number(item.querySelector('.item-quantity').textContent);
+  });
+
+  cartCount = count;
+
+  document.getElementById('cartCount').textContent = cartCount;
+}
+
+document
+  .querySelectorAll('.product')
+  .forEach(function(product) {
+
+    product.addEventListener('click', function() {
+
+      const priceText =
+        product.querySelector('.price').textContent;
+
+      const price =
+       parseFloat(priceText.replace('BYN', '').trim());
+
+      cartCount++;
+      cartTotal += price;
+
+const cartItems =
+  document.getElementById('cartItems');
+
+const existingItem = [...document.querySelectorAll('.cart-item')].find(
+  item => item.querySelector('strong').textContent === product.dataset.product
+);
+
+if (existingItem) {
+  const quantity = existingItem.querySelector('.item-quantity');
+
+  quantity.textContent = Number(quantity.textContent) + 1;
+
+  updateCartCount();
+  updateCartTotal();
+
+  return;
+}
+
+cartItems.innerHTML += `
+  <div class="cart-item" data-price="${price}">
+    <div>
+      <strong>${product.dataset.product}</strong>
+      <span>${price.toFixed(2)} BYN</span>
+    </div>
+
+    <div class="cart-quantity">
+      <button onclick="if (Number(this.nextElementSibling.textContent) > 1) { this.nextElementSibling.textContent = Number(this.nextElementSibling.textContent) - 1; updateCartCount(); updateCartTotal(); }">−</button>
+      
+      <span class="item-quantity">1</span>
+
+     <button onclick="this.previousElementSibling.textContent = Number(this.previousElementSibling.textContent) + 1; updateCartCount(); updateCartTotal()">+</button>
+      <button onclick="this.parentElement.parentElement.remove(); updateCartCount(); updateCartTotal()">×</button>
+
+    </div>
+  </div>
+`;
+    
+     updateCartCount();
+updateCartTotal();
+
+    });
+
+  });
+
+    /* =========================
+
+       SCROLL TO SHOP
+
+    ========================= */
+
+    function goShop() {
+
+      document
+
+        .getElementById('shop')
+
+        .scrollIntoView({
+
+          behavior:
+
+
+'smooth'
+
+        });
+
+    }
+
+    /* =========================
+
+       FINAL LOGO PARALLAX
+
+    ========================= */
+
+    const final =
+
+      document.querySelector('.final');
+
+    const finalLogo =
+
+      document.getElementById('finalLogo');
+
+    final.addEventListener(
+
+      'mousemove',
+
+      function(e) {
+
+        const rect =
+
+          final.getBoundingClientRect();
+
+        const x =
+
+          e.clientX -
+
+          rect.left -
+
+          rect.width / 2;
+
+        const y =
+
+          e.clientY -
+
+          rect.top -
+
+          rect.height / 2;
+
+        finalLogo.style.transform =
+
+          `translate(${x * .025}px, ${y * .025}px)`;
+
+      }
+
+    );
+const cartButton = document.getElementById("cartButton");
+const cartDrawer = document.getElementById("cartDrawer");
+const cartOverlay = document.getElementById("cartOverlay");
+const closeCart = document.getElementById("closeCart");
+
+console.log("КНОПКА КОРЗИНЫ РАБОТАЕТ");
+
+cartButton.addEventListener("click", () => {
+  cartDrawer.classList.add("open");
+  cartOverlay.classList.add("open");
+});
+
+closeCart.addEventListener("click", () => {
+  cartDrawer.classList.remove("open");
+  cartOverlay.classList.remove("open");
+});
+
+cartOverlay.addEventListener("click", () => {
+  cartDrawer.classList.remove("open");
+  cartOverlay.classList.remove("open");
+});
+ document.querySelectorAll(".product").forEach(function(product) {
+  product.addEventListener("click", function() {
+    const name = product.dataset.product;
+    const priceText = product.querySelector(".price").textContent;
+    const price = parseFloat(priceText.replace("BYN", "").trim());
+
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartCount.textContent = "1";
+    cartTotal.textContent = "BYN" + price.toFixed(2);
+  });
+});
+const checkoutButton = document.getElementById('checkoutButton');
+const checkoutModal = document.getElementById('checkoutModal');
+const checkoutClose = document.getElementById('checkoutClose');
+
+checkoutButton.addEventListener('click', function() {
+  checkoutModal.classList.add('open');
+});
+
+checkoutClose.addEventListener('click', function() {
+  checkoutModal.classList.remove('open');
+});
+ </script>
+
+</body><div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-drawer" id="cartDrawer">
+
+  <div class="cart-header">
+
+    <div>
+
+      <span class="cart-kicker">KARÉ / ВАША СУМКА</span>
+
+      <h2>КОРЗИНА</h2>
+
+    </div>
+
+    <button class="cart-close" id="closeCart" onclick="document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open');">×</button>
+    
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+
+    <div class="cart-total">
+
+      <span>ИТОГО</span>
+
+      <strong id="cartTotal"> BYN 0.00</strong>
+
+    </div>
+
+    <button class="checkout-button" id="checkoutButton" onclick="document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('checkoutForm').style.display='none'; document.getElementById('deliveryTitle').textContent=''; document.getElementById('checkoutModal').classList.add('open')">
+
+  ОФОРМИТЬ ЗАКАЗ →
+
+</button>
+
+  </div>
+
+</aside>
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+
+    <button class="checkout-close" id="checkoutClose" onclick="document.getElementById('checkoutModal').classList.remove('open')">×</button>
+
+    <span class="cart-kicker">KARÉ / ОФОРМЛЕНИЕ</span>
+    <h2>КАК ПОЛУЧИТЬ ЗАКАЗ?</h2>
+
+    <div class="delivery-options">
+
+      <button class="delivery-option" data-delivery="Самовывоз" onclick="document.getElementById('deliveryTitle').textContent='САМОВЫВОЗ'; document.getElementById('checkoutForm').style.display='block'; document.getElementById('customerAddress').style.display='none';">
+        
+        <strong>САМОВЫВОЗ</strong>
+        <span>Забрать заказ самостоятельно</span>
+      </button>
+
+     <button class="delivery-option" data-delivery="Доставка по городу" onclick="document.getElementById('deliveryTitle').textContent='ДОСТАВКА ПО ГОРОДУ'; document.getElementById('checkoutForm').style.display='block'; document.getElementById('customerAddress').style.display='block';">
+
+  <strong>ДОСТАВКА ПО ГОРОДУ</strong>
+  <span>Доставка с примеркой</span>
+</button>
+
+      <button class="delivery-option" data-delivery="Доставка в другой город" onclick="document.getElementById('deliveryTitle').textContent='ДРУГОЙ ГОРОД'; document.getElementById('checkoutForm').style.display='block'; document.getElementById('customerAddress').style.display='block'; document.getElementById('customerCity').style.display='block';">
+
+  <strong>ДРУГОЙ ГОРОД</strong>
+  <span>Доставка в другой город</span>
+</button>
+
+    </div>
+    <div class="checkout-form" id="checkoutForm" style="display:none;">
+
+  <h2 id="deliveryTitle"></h2>
+
+  <input type="text" id="customerName" placeholder="Ваше имя">
+
+  <input type="tel" id="customerPhone" placeholder="Номер телефона">
+
+  <input type="text" id="customerAddress" placeholder="Адрес доставки" style="display:none;">
+
+  <input type="text" id="customerCity" placeholder="Ваш город" style="display:none;">
+
+  <button class="checkout-submit" id="checkoutSubmit">
+    ПОДТВЕРДИТЬ ЗАКАЗ →
+  </button>
+
+</div>
+
+  </div>
+</div>
+
+</html>
