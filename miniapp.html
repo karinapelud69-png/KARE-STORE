@@ -748,6 +748,7 @@ hover: hover and (pointer: fine) {
 
 <script>
   let cartCount = 0;
+  let cartItems = [];
 
   document.querySelectorAll('.product-card').forEach(function(product) {
 
@@ -765,6 +766,45 @@ hover: hover and (pointer: fine) {
       void cart.offsetWidth;
 
       cart.classList.add('cart-bump');
+
+      const name =
+        product.querySelector('.product-info strong').textContent;
+
+      const priceText =
+        product.querySelector('.product-info span').textContent;
+
+      const price =
+        parseFloat(priceText.replace('BYN', '').trim());
+
+      cartItems.push({
+        name: name,
+        price: price
+      });
+
+      const cartItemsContainer =
+        document.getElementById('cartItems');
+
+      cartItemsContainer.innerHTML = '';
+
+      cartItems.forEach(function(item) {
+
+        cartItemsContainer.innerHTML += `
+          <div class="cart-item">
+
+            <div class="cart-item-info">
+              <span class="cart-item-name">
+                ${item.name}
+              </span>
+
+              <span class="cart-item-price">
+                ${item.price.toFixed(2)} BYN
+              </span>
+            </div>
+
+          </div>
+        `;
+
+      });
 
     });
 
