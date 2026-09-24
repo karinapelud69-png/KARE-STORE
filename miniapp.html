@@ -465,6 +465,24 @@
   </div>
 
 </body>
+
+<script>
+  let cartCount = 0;
+
+  document.querySelectorAll('.product-card').forEach(function(product) {
+
+    product.addEventListener('click', function() {
+
+      cartCount++;
+
+      document.querySelector('.cart').textContent =
+        'КОРЗИНА (' + cartCount + ')';
+
+    });
+
+  });
+</script>
+
 </html>
 
 
