@@ -420,6 +420,206 @@ hover: hover and (pointer: fine) {
       left: 35%;
       background: rgba(255,100,200,.28);
     }
+    .cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0,0,0,.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.cart-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  right: 0;
+
+  width: min(390px, 88vw);
+  height: 100%;
+  padding: 24px 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(35,29,48,.98),
+      rgba(15,12,22,.98)
+    );
+
+  border-left: 1px solid rgba(255,255,255,.16);
+
+  transform: translateX(105%);
+  transition: transform .35s ease;
+
+  box-shadow:
+    -20px 0 60px rgba(0,0,0,.35);
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.cart-kicker {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .14em;
+
+  color: rgba(255,255,255,.45);
+}
+
+.cart-header h2 {
+  font-size: 32px;
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.cart-close {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.06);
+  color: #fff;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  transition: transform .2s ease, background .2s ease;
+}
+
+.cart-close:active {
+  transform: scale(.9);
+  background: rgba(255,255,255,.14);
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.cart-item-info {
+  min-width: 0;
+}
+
+.cart-item-name {
+  display: block;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.cart-item-price {
+  display: block;
+  margin-top: 5px;
+
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-quantity button {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.06);
+  color: #fff;
+
+  font-size: 16px;
+}
+
+.cart-quantity span {
+  min-width: 18px;
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cart-footer {
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.cart-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+
+.cart-total strong {
+  font-size: 15px;
+  letter-spacing: .02em;
+}
+
+.checkout-button {
+  width: 100%;
+  min-height: 52px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #fff;
+  color: #17131f;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+
+  cursor: pointer;
+}
+
+.checkout-button:active {
+  transform: scale(.97);
+}
   </style>
 </head>
 
@@ -514,6 +714,33 @@ hover: hover and (pointer: fine) {
       </section>
 
     </main>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-drawer" id="cartDrawer">
+
+  <div class="cart-header">
+    <div>
+      <span class="cart-kicker">KARÉ / ВАША СУМКА</span>
+      <h2>КОРЗИНА</h2>
+    </div>
+
+    <button class="cart-close" id="cartClose">×</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>ИТОГО</span>
+      <strong id="cartTotal">0.00 BYN</strong>
+    </div>
+
+    <button class="checkout-button">
+      ОФОРМИТЬ ЗАКАЗ →
+    </button>
+  </div>
+
+</aside>
 
   </div>
 
@@ -542,6 +769,27 @@ hover: hover and (pointer: fine) {
     });
 
   });
+</script>
+
+<script>
+  const cartButton = document.querySelector('.cart');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartClose = document.getElementById('cartClose');
+
+  function openCart() {
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('open');
+  }
+
+  function closeCart() {
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+  }
+
+  cartButton.addEventListener('click', openCart);
+  cartClose.addEventListener('click', closeCart);
+  cartOverlay.addEventListener('click', closeCart);
 </script>
 
 </html>
