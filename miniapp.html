@@ -1210,9 +1210,9 @@ hover: hover and (pointer: fine) {
       <strong id="cartTotal">0.00 BYN</strong>
     </div>
 
-    <button class="checkout-button">
-      ОФОРМИТЬ ЗАКАЗ →
-    </button>
+    <button class="checkout-button" id="checkoutButton">
+  ОФОРМИТЬ ЗАКАЗ →
+</button>
   </div>
 
 </aside>
@@ -1580,6 +1580,45 @@ hover: hover and (pointer: fine) {
   cartOverlay.addEventListener('click', closeCart);
 
   
+</script>
+
+<script>
+  const checkoutButton =
+    document.getElementById('checkoutButton');
+
+  checkoutButton.addEventListener('click', function() {
+
+    if (cartItems.length === 0) {
+      alert('Сначала добавьте товар в корзину 💜');
+      return;
+    }
+
+    const orderText =
+      cartItems.map(function(item) {
+        return (
+          item.name +
+          ' × ' +
+          item.quantity +
+          ' — ' +
+          (item.price * item.quantity).toFixed(2) +
+          ' BYN'
+        );
+      }).join('\n');
+
+    const total =
+      cartItems.reduce(function(sum, item) {
+        return sum + item.price * item.quantity;
+      }, 0);
+
+    alert(
+      'ВАШ ЗАКАЗ 💜\n\n' +
+      orderText +
+      '\n\nИТОГО: ' +
+      total.toFixed(2) +
+      ' BYN'
+    );
+
+  });
 </script>
 
 </html>
