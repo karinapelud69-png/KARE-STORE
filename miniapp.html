@@ -1123,6 +1123,30 @@ hover: hover and (pointer: fine) {
 
     product.addEventListener('click', function() {
 
+      const name =
+        product.querySelector('.product-info strong').textContent;
+
+      const priceText =
+        product.querySelector('.product-info span').textContent;
+
+      const price =
+        parseFloat(priceText.replace('BYN', '').trim());
+
+      const existingItem =
+        cartItems.find(function(item) {
+          return item.name === name;
+        });
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
+
       cartCount++;
 
       const cart = document.querySelector('.cart');
@@ -1136,62 +1160,159 @@ hover: hover and (pointer: fine) {
 
       cart.classList.add('cart-bump');
 
-      const name =
-        product.querySelector('.product-info strong').textContent;
-
-      const priceText =
-        product.querySelector('.product-info span').textContent;
-
-      const price =
-        parseFloat(priceText.replace('BYN', '').trim());
-
-      cartItems.push({
-        name: name,
-        price: price
-      });
-
-      const cartItemsContainer =
-        document.getElementById('cartItems');
-
-      cartItemsContainer.innerHTML = '';
-
-      cartItems.forEach(function(item) {
-
-        cartItemsContainer.innerHTML += `
-          <div class="cart-item">
-
-            <div class="cart-item-info">
-              <span class="cart-item-name">
-                ${item.name}
-              </span>
-
-              <span class="cart-item-price">
-                ${item.price.toFixed(2)} BYN
-              </span>
-            </div>
-
-          </div>
-        `;
-
-      });
-
-    let total = 0;
-
-cartItems.forEach(function(item) {
-  total += Number(item.price) || 0;
-});
-
-const cartTotalElement = document.getElementById('cartTotal');
-
-if (cartTotalElement) {
-  cartTotalElement.textContent =
-    total.toFixed(2) + ' BYN';
-}
+      renderCart();
 
     });
 
-  }); 
+  });
 
+  function renderCart() {
+
+    const cartItemsContainer =
+      document.getElementById('cartItems');
+
+    cartItemsContainer.innerHTML = '';
+
+    cartItems.forEach(function(item, index) {
+
+      cartItemsContainer.innerHTML += `
+        <div class="cart-item">
+
+          <div class="cart-item-info">
+
+            <span class="cart-item-name">
+              ${item.name}
+            </span>
+
+            <span class="cart-item-price">
+              ${(item.price * item.quantity).toFixed(2)} BYN
+            </span>
+
+          </div>
+
+          <div class="cart-item-controls">
+
+            <button
+              type="button"
+              class="quantity-button"
+              data-action="minus"
+              data-index="${index}"
+            >
+              −
+            </button>
+
+            <span class="quantity-value">
+              ${item.quantity}
+            </span>
+
+            <button
+              type="button"
+              class="quantity-button"
+              data-action="plus"
+              data-index="${index}"
+            >
+              +
+            </button>
+
+            <button
+              type="button"
+              class="remove-button"
+              data-action="remove"
+              data-index="${index}"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+    let total = 0;
+
+    cartItems.forEach(function(item) {
+
+      total +=
+        item.price * item.quantity;
+
+    });
+
+    const cartTotalElement =
+      document.getElementById('cartTotal');
+
+    if (cartTotalElement) {
+
+      cartTotalElement.textContent =
+        total.toFixed(2) + ' BYN';
+
+    }
+
+    document
+      .querySelectorAll('.quantity-button, .remove-button')
+      .forEach(function(button) {
+
+        button.addEventListener('click', function(event) {
+
+          event.stopPropagation();
+
+          const index =
+            Number(button.dataset.index);
+
+          const action =
+            button.dataset.action;
+
+          if (action === 'plus') {
+
+            cartItems[index].quantity++;
+            cartCount++;
+
+          }
+
+          if (action === 'minus') {
+
+            if (cartItems[index].quantity > 1) {
+
+              cartItems[index].quantity--;
+              cartCount--;
+
+            } else {
+
+              cartCount--;
+
+              cartItems.splice(index, 1);
+
+            }
+
+          }
+
+          if (action === 'remove') {
+
+            cartCount -=
+              cartItems[index].quantity;
+
+            cartItems.splice(index, 1);
+
+          }
+
+          if (cartCount < 0) {
+            cartCount = 0;
+          }
+
+          const cart =
+            document.querySelector('.cart');
+
+          cart.textContent =
+            'КОРЗИНА (' + cartCount + ')';
+
+          renderCart();
+
+        });
+
+      });
+
+  }
 </script>
 
 <script>
