@@ -963,7 +963,7 @@ hover: hover and (pointer: fine) {
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <div class="floating-pill pill-1" data-filter="all">
+    <div class="floating-pill pill-1" data-filter="all" id="newCollectionPill">
       NEW COLLECTION
     </div>
 
@@ -1195,20 +1195,23 @@ if (cartTotalElement) {
 </script>
 
 <script>
-  document.querySelectorAll('.floating-pill').forEach(function(pill) {
+  const newCollectionPill =
+    document.getElementById('newCollectionPill');
 
-    pill.addEventListener('click', function() {
+  newCollectionPill.addEventListener('click', function() {
 
-      const shop = document.querySelector('.shop');
+    newCollectionPill.style.boxShadow =
+      '0 0 25px #fff, 0 0 60px #9b5cff';
 
-      if (shop) {
-        shop.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
+    newCollectionPill.style.transform =
+      'scale(1.12)';
 
-    });
+    setTimeout(function() {
+
+      newCollectionPill.style.boxShadow = '';
+      newCollectionPill.style.transform = '';
+
+    }, 500);
 
   });
 </script>
