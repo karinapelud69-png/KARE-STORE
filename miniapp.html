@@ -933,6 +933,112 @@ hover: hover and (pointer: fine) {
 .checkout-button:active {
   transform: scale(.97);
 }
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.quantity-button {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.08);
+  color: #fff;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.quantity-button:active {
+  transform: scale(.88);
+  background: rgba(155,92,255,.35);
+  box-shadow:
+    0 0 18px rgba(155,92,255,.45);
+}
+
+.quantity-value {
+  min-width: 32px;
+
+  text-align: center;
+
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.remove-button {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+
+  margin-left: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,100,180,.25);
+  border-radius: 14px;
+
+  background: rgba(255,80,150,.08);
+  color: #ff9bc9;
+
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.remove-button:active {
+  transform: scale(.88);
+  background: rgba(255,70,150,.3);
+  box-shadow:
+    0 0 18px rgba(255,70,150,.4);
+}
+
+hover: hover and (pointer: fine) {
+
+  .quantity-button:hover {
+    background: rgba(155,92,255,.25);
+    box-shadow:
+      0 0 18px rgba(155,92,255,.3);
+    transform: translateY(-2px);
+  }
+
+  .remove-button:hover {
+    background: rgba(255,70,150,.2);
+    box-shadow:
+      0 0 18px rgba(255,70,150,.25);
+    transform: translateY(-2px);
+  }
+
+}
+
   </style>
 </head>
 
