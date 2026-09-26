@@ -1213,17 +1213,12 @@ if (cartTotalElement) {
       allTab.click();
     }
 
-    const shop =
-      document.querySelector('.shop');
-
-    if (shop) {
-      setTimeout(function() {
-        shop.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }, 250);
-    }
+    setTimeout(function() {
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  });
+}, 250);
 
     setTimeout(function() {
       newCollectionPill.style.boxShadow = '';
