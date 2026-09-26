@@ -806,9 +806,19 @@ hover: hover and (pointer: fine) {
 
       });
 
+      let total = 0;
+
+cartItems.forEach(function(item) {
+  total += item.price;
+});
+
+document.getElementById('cartTotal').textContent =
+  total.toFixed(2) + ' BYN';
+
     });
 
-  });
+  }); 
+
 </script>
 
 <script>
