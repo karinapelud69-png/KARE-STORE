@@ -2125,6 +2125,123 @@ updateDeliveryFields();
 
 </script>
 
+<script>
+  const checkoutSubmit =
+    document.getElementById('checkoutSubmit');
+
+  checkoutSubmit.addEventListener('click', function() {
+
+    const name =
+      document.getElementById('checkoutName').value.trim();
+
+    const phone =
+      document.getElementById('checkoutPhone').value.trim();
+
+    const city =
+      document.getElementById('checkoutCity').value.trim();
+
+    const address =
+      document.getElementById('checkoutAddress').value.trim();
+
+    const delivery =
+      document.querySelector(
+        'input[name="delivery"]:checked'
+      );
+
+    if (!name) {
+      alert('Введите ваше имя 💜');
+      return;
+    }
+
+    if (!phone) {
+      alert('Введите номер телефона 📞');
+      return;
+    }
+
+    if (!delivery) {
+      alert('Выберите способ получения заказа 📦');
+      return;
+    }
+
+    if (
+      delivery.value !== 'pickup' &&
+      (!city || !address)
+    ) {
+      alert('Введите город и адрес доставки 📍');
+      return;
+    }
+
+    let orderText = '';
+
+    cartItems.forEach(function(item) {
+
+      orderText +=
+        item.name +
+        ' × ' +
+        item.quantity +
+        ' — ' +
+        (item.price * item.quantity).toFixed(2) +
+        ' BYN\n';
+
+    });
+
+    let total = 0;
+
+    cartItems.forEach(function(item) {
+
+      total +=
+        item.price * item.quantity;
+
+    });
+
+    let deliveryText = '';
+
+    if (delivery.value === 'pickup') {
+
+      deliveryText = 'Самовывоз';
+
+    } else if (delivery.value === 'city') {
+
+      deliveryText =
+        'Доставка по городу с примеркой';
+
+    } else {
+
+      deliveryText =
+        'Доставка в другой город';
+
+    }
+
+    let finalMessage =
+      'ЗАКАЗ KARÉ 💜\n\n' +
+
+      'Клиент: ' + name + '\n' +
+
+      'Телефон: ' + phone + '\n\n' +
+
+      'Получение: ' +
+      deliveryText + '\n';
+
+    if (delivery.value !== 'pickup') {
+
+      finalMessage +=
+        'Город: ' + city + '\n' +
+        'Адрес: ' + address + '\n';
+
+    }
+
+    finalMessage +=
+      '\nТОВАРЫ:\n' +
+      orderText +
+      '\nИТОГО: ' +
+      total.toFixed(2) +
+      ' BYN';
+
+    alert(finalMessage);
+
+  });
+</script>
+
 </html>
 
 
