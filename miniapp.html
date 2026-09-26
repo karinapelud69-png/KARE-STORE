@@ -1206,11 +1206,28 @@ if (cartTotalElement) {
     newCollectionPill.style.transform =
       'scale(1.12)';
 
-    setTimeout(function() {
+    const allTab =
+      document.querySelector('.category-tab[data-category="all"]');
 
+    if (allTab) {
+      allTab.click();
+    }
+
+    const shop =
+      document.querySelector('.shop');
+
+    if (shop) {
+      setTimeout(function() {
+        shop.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 250);
+    }
+
+    setTimeout(function() {
       newCollectionPill.style.boxShadow = '';
       newCollectionPill.style.transform = '';
-
     }, 500);
 
   });
