@@ -1195,6 +1195,25 @@ if (cartTotalElement) {
 </script>
 
 <script>
+  document.querySelectorAll('.floating-pill').forEach(function(pill) {
+
+    pill.addEventListener('click', function() {
+
+      const shop = document.querySelector('.shop');
+
+      if (shop) {
+        shop.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+
+    });
+
+  });
+</script>
+
+<script>
   const cartButton = document.querySelector('.cart');
   const cartDrawer = document.getElementById('cartDrawer');
   const cartOverlay = document.getElementById('cartOverlay');
@@ -1213,6 +1232,8 @@ if (cartTotalElement) {
   cartButton.addEventListener('click', openCart);
   cartClose.addEventListener('click', closeCart);
   cartOverlay.addEventListener('click', closeCart);
+
+  
 </script>
 
 </html>
