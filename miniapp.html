@@ -2074,6 +2074,55 @@ ease;
     }
 
   });
+
+const deliveryOptions =
+  document.querySelectorAll('input[name="delivery"]');
+
+const cityField =
+  document.getElementById('checkoutCity');
+
+const addressField =
+  document.getElementById('checkoutAddress');
+
+function updateDeliveryFields() {
+
+  const selectedDelivery =
+    document.querySelector(
+      'input[name="delivery"]:checked'
+    );
+
+  if (!selectedDelivery) {
+    return;
+  }
+
+  if (selectedDelivery.value === 'pickup') {
+
+    cityField.style.display = 'none';
+    addressField.style.display = 'none';
+
+    cityField.value = '';
+    addressField.value = '';
+
+  } else {
+
+    cityField.style.display = '';
+    addressField.style.display = '';
+
+  }
+
+}
+
+deliveryOptions.forEach(function(option) {
+
+  option.addEventListener(
+    'change',
+    updateDeliveryFields
+  );
+
+});
+
+updateDeliveryFields();
+
 </script>
 
 </html>
