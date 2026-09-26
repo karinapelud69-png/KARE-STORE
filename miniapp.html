@@ -967,9 +967,9 @@ hover: hover and (pointer: fine) {
       NEW COLLECTION
     </div>
 
-    <div class="floating-pill pill-2" data-filter="all">
-      Y2K / FUTURE
-    </div>
+    <div class="floating-pill pill-2" data-filter="all" id="y2kPill">
+  Y2K / FUTURE
+</div>
 
     <div class="floating-pill pill-3" data-filter="all">
       KARÉ STUDIO
@@ -1223,6 +1223,42 @@ if (cartTotalElement) {
     setTimeout(function() {
       newCollectionPill.style.boxShadow = '';
       newCollectionPill.style.transform = '';
+    }, 500);
+
+  });
+</script>
+
+<script>
+  const y2kPill =
+    document.getElementById('y2kPill');
+
+  y2kPill.addEventListener('click', function() {
+
+    y2kPill.style.boxShadow =
+      '0 0 25px #fff, 0 0 60px #4d8dff';
+
+    y2kPill.style.transform =
+      'scale(1.12)';
+
+    const clothingTab =
+      document.querySelector(
+        '.category-tab[data-category="clothing"]'
+      );
+
+    if (clothingTab) {
+      clothingTab.click();
+    }
+
+    setTimeout(function() {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    }, 250);
+
+    setTimeout(function() {
+      y2kPill.style.boxShadow = '';
+      y2kPill.style.transform = '';
     }, 500);
 
   });
