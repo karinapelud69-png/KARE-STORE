@@ -1217,6 +1217,132 @@ hover: hover and (pointer: fine) {
 
 </aside>
 
+<div class="checkout-modal" id="checkoutModal">
+
+  <div class="checkout-box">
+
+    <button
+      class="checkout-close"
+      id="checkoutClose"
+      type="button"
+    >
+      ×
+    </button>
+
+    <span class="checkout-kicker">
+      KARÉ / ОФОРМЛЕНИЕ
+    </span>
+
+    <h2>
+      ОФОРМИТЬ
+
+      ЗАКАЗ
+    </h2>
+
+    <div class="checkout-summary">
+
+      <div>
+        <span>ТОВАРОВ</span>
+        <strong id="checkoutCount">0</strong>
+      </div>
+
+      <div>
+        <span>ИТОГО</span>
+        <strong id="checkoutTotal">0.00 BYN</strong>
+      </div>
+
+    </div>
+
+    <div class="delivery-title">
+      СПОСОБ ПОЛУЧЕНИЯ
+    </div>
+
+    <label class="delivery-option">
+
+      <input
+        type="radio"
+        name="delivery"
+        value="pickup"
+        checked
+      >
+
+      <span>
+        <strong>САМОВЫВОЗ</strong>
+        <small>Заберу заказ самостоятельно</small>
+      </span>
+
+    </label>
+
+    <label class="delivery-option">
+
+      <input
+        type="radio"
+        name="delivery"
+        value="city"
+      >
+
+      <span>
+        <strong>ДОСТАВКА ПО ГОРОДУ</strong>
+        <small>С примеркой</small>
+      </span>
+
+    </label>
+
+    <label class="delivery-option">
+
+      <input
+        type="radio"
+        name="delivery"
+        value="other"
+      >
+
+      <span>
+        <strong>ДРУГОЙ ГОРОД</strong>
+        <small>Доставка транспортной службой</small>
+      </span>
+
+    </label>
+
+    <div class="checkout-fields">
+
+      <input
+        type="text"
+        id="checkoutName"
+        placeholder="Ваше имя"
+      >
+
+      <input
+        type="tel"
+        id="checkoutPhone"
+        placeholder="Номер телефона"
+      >
+
+      <input
+        type="text"
+        id="checkoutCity"
+        placeholder="Город"
+      >
+
+      <input
+        type="text"
+        id="checkoutAddress"
+        placeholder="Адрес"
+      >
+
+    </div>
+
+    <button
+      class="checkout-submit"
+      id="checkoutSubmit"
+      type="button"
+    >
+      ПОДТВЕРДИТЬ ЗАКАЗ →
+    </button>
+
+  </div>
+
+</div>
+
   </div>
 
 </body>
@@ -1586,6 +1712,12 @@ hover: hover and (pointer: fine) {
   const checkoutButton =
     document.getElementById('checkoutButton');
 
+  const checkoutModal =
+    document.getElementById('checkoutModal');
+
+  const checkoutClose =
+    document.getElementById('checkoutClose');
+
   checkoutButton.addEventListener('click', function() {
 
     if (cartItems.length === 0) {
@@ -1593,30 +1725,42 @@ hover: hover and (pointer: fine) {
       return;
     }
 
-    const orderText =
-      cartItems.map(function(item) {
-        return (
-          item.name +
-          ' × ' +
-          item.quantity +
-          ' — ' +
-          (item.price * item.quantity).toFixed(2) +
-          ' BYN'
-        );
-      }).join('\n');
+    let count = 0;
+    let total = 0;
 
-    const total =
-      cartItems.reduce(function(sum, item) {
-        return sum + item.price * item.quantity;
-      }, 0);
+    cartItems.forEach(function(item) {
 
-    alert(
-      'ВАШ ЗАКАЗ 💜\n\n' +
-      orderText +
-      '\n\nИТОГО: ' +
-      total.toFixed(2) +
-      ' BYN'
-    );
+      count += item.quantity;
+
+      total +=
+        item.price * item.quantity;
+
+    });
+
+    document.getElementById('checkoutCount')
+      .textContent = count;
+
+    document.getElementById('checkoutTotal')
+      .textContent =
+        total.toFixed(2) + ' BYN';
+
+    checkoutModal.classList.add('open');
+
+  });
+
+  checkoutClose.addEventListener('click', function() {
+
+    checkoutModal.classList.remove('open');
+
+  });
+
+  checkoutModal.addEventListener('click', function(event) {
+
+    if (event.target === checkoutModal) {
+
+      checkoutModal.classList.remove('open');
+
+    }
 
   });
 </script>
