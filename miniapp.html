@@ -224,6 +224,125 @@ hover: hover and (pointer: fine) {
       color: rgba(255,255,255,.9);
     }
 
+.shop {
+  width: 100%;
+  padding: 70px 18px 100px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(145,80,255,.18), transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(70,150,255,.12), transparent 30%),
+    #17131f;
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-heading {
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.shop-heading span {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.42);
+}
+
+.shop-heading h2 {
+  font-size: 42px;
+  line-height: .88;
+  letter-spacing: -.07em;
+  font-weight: 950;
+  background: linear-gradient(
+    110deg,
+    #fff,
+    #cdb4ff,
+    #8dbdff,
+    #fff
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shopGradient 4s linear infinite;
+}
+
+.shop-heading p {
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.48);
+}
+
+@keyframes shopGradient {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0 18px;
+  scrollbar-width: none;
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tab {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.58);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  cursor: pointer;
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    color .25s ease,
+    box-shadow .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-tab.active {
+  background: #fff;
+  color: #17131f;
+  border-color: #fff;
+  box-shadow:
+    0 0 18px rgba(255,255,255,.18),
+    0 0 40px rgba(150,90,255,.16);
+}
+
+.category-tab:active {
+  transform: scale(.94);
+}
+
+hover: hover and (pointer: fine) {
+  .category-tab:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,.4);
+    color: #fff;
+  }
+
+  .category-tab.active:hover {
+    color: #17131f;
+  }
+}
+
  .products {
   width: 100%;
   padding: 80px 18px 100px;
@@ -633,85 +752,134 @@ hover: hover and (pointer: fine) {
       </div>
     </header>
 
-    <main>
+   <main>
 
-      <section class="hero">
+  <section class="hero">
 
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-        <div class="floating-pill pill-1">
-          NEW COLLECTION
-        </div>
+    <div class="floating-pill pill-1" data-filter="all">
+      NEW COLLECTION
+    </div>
 
-        <div class="floating-pill pill-2">
-          Y2K / FUTURE
-        </div>
+    <div class="floating-pill pill-2" data-filter="all">
+      Y2K / FUTURE
+    </div>
 
-        <div class="floating-pill pill-3">
-          KARÉ STUDIO
-        </div>
+    <div class="floating-pill pill-3" data-filter="all">
+      KARÉ STUDIO
+    </div>
 
-        <h1 class="hero-title">
+    <h1 class="hero-title">
+      KARÉ
+    </h1>
+
+    <p class="hero-subtitle">
+      Y2K / FUTURE / STUDIO
+    </p>
+
+    <div class="fashion-frame"></div>
+
+  </section>
+
+  <section class="shop">
+
+    <div class="shop-heading">
+      <span>KARÉ / SHOP</span>
+
+      <h2>
+        ВЫБЕРИ
+
+        СВОЙ KARÉ
+      </h2>
+
+      <p>
+        Одежда · обувь · аксессуары
+      </p>
+    </div>
+
+    <div class="category-tabs">
+
+      <button class="category-tab active" data-category="all">
+        ВСЁ
+      </button>
+
+      <button class="category-tab" data-category="clothing">
+        ОДЕЖДА
+      </button>
+
+      <button class="category-tab" data-category="shoes">
+        ОБУВЬ
+      </button>
+
+      <button class="category-tab" data-category="accessories">
+        АКСЕССУАРЫ
+      </button>
+
+    </div>
+
+    <div class="products-grid">
+
+      <article class="product-card" data-category="clothing">
+
+        <div class="product-image">
           KARÉ
-        </h1>
-
-       <p class="hero-subtitle">
-          Y2K / FUTURE / STUDIO
-        </p>
-
-        <div class="fashion-frame"></div>
-
-      </section>
-
-      <section class="products">
-
-        <div class="products-title">
-          <span>KARÉ / COLLECTION</span>
-          <h2>НОВАЯ
-КОЛЛЕКЦИЯ</h2>
         </div>
 
-        <div class="products-grid">
-
-          <article class="product-card">
-            <div class="product-image">KARÉ</div>
-            <div class="product-info">
-              <strong>KARÉ OVERSIZE TEE</strong>
-              <span>129.99 BYN</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-image">KARÉ</div>
-            <div class="product-info">
-              <strong>KARÉ FUTURE JACKET</strong>
-              <span>389.99 BYN</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-image">KARÉ</div>
-            <div class="product-info">
-              <strong>KARÉ RUNNER</strong>
-              <span>289.99 BYN</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-image">KARÉ</div>
-            <div class="product-info">
-              <strong>KARÉ BAG 01</strong>
-              <span>219.99 BYN</span>
-            </div>
-          </article>
-
+        <div class="product-info">
+          <strong>KARÉ OVERSIZE TEE</strong>
+          <span>129.99 BYN</span>
         </div>
 
-      </section>
+      </article>
 
-    </main>
+      <article class="product-card" data-category="clothing">
+
+        <div class="product-image">
+          KARÉ
+        </div>
+
+        <div class="product-info">
+          <strong>KARÉ FUTURE JACKET</strong>
+          <span>389.99 BYN</span>
+        </div>
+
+      </article>
+
+      <article class="product-card" data-category="shoes">
+
+        <div class="product-image">
+          KARÉ
+        </div>
+
+        <div class="product-info">
+          <strong>KARÉ RUNNER</strong>
+          <span>289.99 BYN</span>
+        </div>
+
+      </article>
+
+      <article class="product-card" data-category="accessories">
+
+        <div class="product-image">
+          KARÉ
+        </div>
+
+        <div class="product-info">
+          <strong>KARÉ BAG 01</strong>
+          <span>219.99 BYN</span>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</main>
+
     <div class="cart-overlay" id="cartOverlay"></div>
 
 <aside class="cart-drawer" id="cartDrawer">
