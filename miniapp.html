@@ -1229,6 +1229,38 @@ if (cartTotalElement) {
 </script>
 
 <script>
+  document.querySelectorAll('.category-tab').forEach(function(tab) {
+
+    tab.addEventListener('click', function() {
+
+      const category =
+        tab.dataset.category;
+
+      document.querySelectorAll('.category-tab').forEach(function(button) {
+        button.classList.remove('active');
+      });
+
+      tab.classList.add('active');
+
+      document.querySelectorAll('.product-card').forEach(function(product) {
+
+        if (
+          category === 'all' ||
+          product.dataset.category === category
+        ) {
+          product.style.display = '';
+        } else {
+          product.style.display = 'none';
+        }
+
+      });
+
+    });
+
+  });
+</script>
+
+<script>
   const y2kPill =
     document.getElementById('y2kPill');
 
