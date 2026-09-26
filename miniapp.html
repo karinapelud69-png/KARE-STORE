@@ -1039,6 +1039,317 @@ hover: hover and (pointer: fine) {
 
 }
 
+.checkout-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(8, 6, 14, .78);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity .3s ease;
+}
+
+.checkout-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.checkout-box {
+  position: relative;
+
+  width: min(420px, 100%);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 28px 20px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(39, 30, 56, .98),
+      rgba(16, 12, 24, .98)
+    );
+
+  border: 1px solid rgba(255,255,255,.16);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.65),
+    0 0 70px rgba(155,92,255,.18);
+
+  transform: scale(.92) translateY(20px);
+
+  transition:
+    transform .35s ease;
+}
+
+.checkout-modal.open .checkout-box {
+  transform: scale(1) translateY(0);
+}
+
+.checkout-close {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.07);
+
+  color: #fff;
+
+  font-size: 26px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.checkout-kicker {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .16em;
+
+  color: rgba(255,255,255,.42);
+}
+
+.checkout-box h2 {
+  font-size: 38px;
+  line-height: .88;
+
+  letter-spacing: -.06em;
+
+  font-weight: 950;
+
+  background:
+    linear-gradient(
+      110deg,
+      #fff,
+      #cdb4ff,
+      #8dbdff,
+      #fff
+    );
+
+  background-size: 200% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  margin-bottom: 24px;
+}
+
+.checkout-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.checkout-summary > div {
+  padding: 14px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.055);
+
+  border: 1px solid rgba(255,255,255,.09);
+}
+
+.checkout-summary span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: .12em;
+
+  color: rgba(255,255,255,.4);
+}
+
+.checkout-summary strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.delivery-title {
+  margin-bottom: 10px;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: .13em;
+
+  color: rgba(255,255,255,.5);
+}
+
+.delivery-option {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  margin-bottom: 8px;
+
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.04);
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.delivery-option:active {
+  transform: scale(.98);
+}
+
+.delivery-option input {
+  width: 20px;
+  height: 20px;
+
+  accent-color: #9b5cff;
+
+  flex: 0 0 auto;
+}
+
+.delivery-option span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.delivery-option strong {
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.delivery-option small {
+  font-size: 9px;
+  color: rgba(255,255,255,.45);
+}
+
+.checkout-fields {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.checkout-fields input {
+  width: 100%;
+
+  min-height: 50px;
+
+  padding: 0 15px;
+
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 15px;
+
+  outline: none;
+
+  background: rgba(255,255,255,.055);
+
+  color: #fff;
+
+  font-size: 14px;
+}
+
+.checkout-fields input::placeholder {
+  color: rgba(255,255,255,.38);
+}
+
+.checkout-fields input:focus {
+  border-color: rgba(170,110,255,.65);
+
+  box-shadow:
+    0 0 20px rgba(155,92,255,.16);
+}
+
+.checkout-submit {
+  width: 100%;
+
+  min-height: 54px;
+
+  margin-top: 18px;
+
+  border: 0;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #fff,
+      #d9c6ff,
+      #a98cff
+    );
+
+  color: #17131f;
+
+  font-size: 10px;
+  font-weight: 950;
+
+  letter-spacing: .12em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 25px rgba(155,92,255,.22);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s
+
+
+ease;
+}
+
+.checkout-submit:active {
+  transform: scale(.97);
+
+  box-shadow:
+    0 0 40px rgba(155,92,255,.45);
+}
+
   </style>
 </head>
 
