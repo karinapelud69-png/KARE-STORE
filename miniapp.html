@@ -140,32 +140,64 @@ hover: hover and (pointer: fine) {
     }
 
     .hero-title {
-      position: relative;
-      z-index: 5;
+  position: relative;
+  z-index: 5;
 
-      text-align: center;
+  text-align: center;
 
-      font-size: clamp(56px, 18vw, 110px);
-      line-height: .85;
-      font-weight: 900;
-      letter-spacing: -.07em;
+  font-size: clamp(56px, 18vw, 110px);
+  line-height: .85;
+  font-weight: 900;
+  letter-spacing: -.07em;
 
-      background:
-        linear-gradient(
-          110deg,
-          #fff,
-          #d7c2ff,
-          #9ec7ff,
-          #fff
-        );
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #d8c5ff 25%,
+      #8fc5ff 45%,
+      #ffffff 60%,
+      #c58cff 80%,
+      #ffffff 100%
+    );
 
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+  background-size: 250% auto;
 
-      text-shadow:
-        0 0 35px rgba(170,120,255,.25);
-    }
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 0 18px rgba(170,120,255,.45),
+    0 0 45px rgba(120,90,255,.35),
+    0 0 90px rgba(80,150,255,.18);
+
+  animation:
+    kareGlow 3s ease-in-out infinite,
+    kareShine 5s linear infinite;
+}
+
+@keyframes kareGlow {
+  0%, 100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  50% {
+    filter: brightness(1.35);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes kareShine {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 250% center;
+  }
+}
 
     .hero-subtitle {
       position: relative;
