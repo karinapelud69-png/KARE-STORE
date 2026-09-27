@@ -504,11 +504,24 @@ hover: hover and (pointer: fine) {
       gap: 14px;
     }
 
-    .product-card {
+   .product-card {
   min-width: 0;
   cursor: pointer;
-  transition: transform .25s ease, filter .25s ease;
+  position: relative;
+  transition:
+    transform .25s ease,
+    filter .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+.product-card:active {
+  transform: scale(.96);
+  filter: brightness(1.2);
+  box-shadow:
+    0 0 25px rgba(155,92,255,.45),
+    0 0 60px rgba(155,92,255,.2);
 }
 
 .product-card:active {
