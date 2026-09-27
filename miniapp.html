@@ -515,6 +515,32 @@ hover: hover and (pointer: fine) {
     border-color .25s ease;
   -webkit-tap-highlight-color: transparent;
 }
+.product-card.selected {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(180,120,255,.9);
+  box-shadow:
+    0 0 0 2px rgba(155,92,255,.35),
+    0 0 30px rgba(155,92,255,.55),
+    0 0 80px rgba(155,92,255,.25);
+  filter: brightness(1.12);
+}
+
+.product-card.selected::after {
+  content: "✓ В КОРЗИНЕ";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(155,92,255,.9);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  box-shadow:
+    0 0 18px rgba(155,92,255,.6);
+}
 
 .product-card:active {
   transform: scale(.96);
@@ -1681,6 +1707,8 @@ ease;
   document.querySelectorAll('.product-card').forEach(function(product) {
 
     product.addEventListener('click', function() {
+
+      product.classList.add('selected');
 
       const name =
         product.querySelector('.product-info strong').textContent;
